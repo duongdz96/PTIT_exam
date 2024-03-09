@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in</title>
+    <link rel="stylesheet" href="./login.css">
+</head>
+
+<body>
+    <div class="main">
+        <div class="container">
+            <header class="header">
+                <img src="../assets/image/logo_ptit.png" alt="Logo" class="logo-ptit">
+            </header>
+            <div class="title-container">
+                <p>Log in</p>
+                <h4>PTIT Exam</h4>
+            </div>
+            <form class="signin-form" id="sign-in-form">
+                <!-- <label for="signin-email">Email</label> -->
+                <input type="email" class="input-container" id="signin-email" required placeholder="Email">
+
+                <!-- <label for="signin-password">Password</label> -->
+                <input type="password" class="input-container" id="signin-password" required placeholder="Password">
+                <div class="forget-password">
+                    <a href="#">Forget your password</a>
+                </div>
+                <button id="Submit" class="signin-btn">Log in</button>
+                <div class="login-with">
+                    <p>Don't have account. Sign up <a href="./sign-up.html">here</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAy576_O6xuuU7c0E0vWD4V_TnFzuH0VB0",
+            authDomain: "ptit-exam.firebaseapp.com",
+            projectId: "ptit-exam",
+            storageBucket: "ptit-exam.appspot.com",
+            messagingSenderId: "84367991373",
+            appId: "1:84367991373:web:458ef56440dabebf7cf204"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        document.getElementById("sign-in-form").addEventListener('Submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById("signin-email").value;
+            const password = document.getElementById("signin-password").value;
+            if (email === "admin@admin.com" && password === "admin") {
+                localStorage.setItem('username', admin);
+            } else {
+                signInWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        const user = userCredential.user;
+                        const name = user.displayName;
+                        localStorage.setItem('username', name);
+                        // window.location.assign('')
+                    })
+                    .catch((error) => {
+                        alert("Your email or password is incorrect. Please try again");
+                    })
+
+            }
+
+        })
+
+    </script>
+</body>
+
+</html>
