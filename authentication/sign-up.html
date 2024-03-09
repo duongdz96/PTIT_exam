@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign up</title>
-    <link rel="stylesheet" href="./login.css">
+    <link rel="stylesheet" href="./signup.css">
 </head>
 
 <body>
@@ -25,6 +25,7 @@
                 <input type="password" class="input-container" id="signup-password" required placeholder="Password">
                 <input type="password" class="input-container" id="confirm-password" required
                     placeholder="Confirm Password">
+                <p>Have an account? <a href="login.html">Sign in</a></p>
                 <button type="submit" class="signin-btn">Sign Up</button>
             </form>
         </div>
@@ -55,18 +56,18 @@
         signUpForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            const email = document.getElementById('signup-email').value;
-            const password = document.getElementById('signup-password').value;
-            const confirmPassword = document.getElementById('confirm-password').value;
-            const name = document.getElementById("signup-name").value;
+            const email = signUpForm['signup-email'].value;
+            const password = signUpForm['signup-password'].value;
+            const confirmPassword = signUpForm['confirm-password'].value;
+            const name = signUpForm["signup-name"].value;
 
-            if(password !== confirmPassword){
+            if (password !== confirmPassword) {
                 alert("Passwords do not match");
                 return;
             }
             let lastID = parseInt(localStorage.getItem('lastStudentID')) || 0;
-            lastID ++;
-            const studentID = `B21DCCN${String(lastID).padStart(3,'0')}`;
+            lastID++;
+            const studentID = `B21DCCN${String(lastID).padStart(3, '0')}`;
             createUserWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                     const user = userCredential.user;
@@ -74,12 +75,12 @@
                         displayName: name,
                         student: studentID,
                     })
-                    .then(() => {
-                        localStorage.setItem('username', name);
-                        localStorage.setItem('studentID', studentID);
-                        localStorage.setItem('lastStudentID', lastID.toString());
-
-                    })
+                        .then(() => {
+                            localStorage.setItem('username', name);
+                            localStorage.setItem('studentID', studentID);
+                            localStorage.setItem('lastStudentID', lastID.toString());
+                            window.location.assign('./login.html')
+                        })
                 })
                 .catch((error) => {
                     const errorCode = error.code;

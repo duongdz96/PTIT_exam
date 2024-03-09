@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exams</title>
+    <link rel="stylesheet" href="./exams.css">
+    <link rel="stylesheet" href="../assets/themify-icons/themify-icons.css">
+</head>
+
+<body>
+
+    <div id="main">
+        <div id="header">
+            <p class="userNameDisplay">Nguyen Ba Duong - B21DCCN038</p>
+            <div class="search-btn">
+                <img src="https://code.ptit.edu.vn/2020/images/avt.png" alt="user" class="user-account">
+                <!-- <i class="ti-angle-down"></i> -->
+                <div class="dropdown-menu">
+                    <ul>
+                        <li><a href="#">Information</a></li>
+                        <li><a href="#">Log out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="slider">
+            <div class="container">
+                <h1>Exam list</h1>
+                <div class="filters">
+                    <input type="text" id="search" placeholder="Search...">
+                    <select name="" id="status-filter">
+                        <option value="all">All status</option>
+                        <option value="free-access">Free Access</option>
+                        <option value="scheduled">Scheduled</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer">
+
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            const userAvatar = document.querySelector('.user-account');
+            const dropdownMenu = document.querySelector('.dropdown-menu');
+
+            userAvatar.addEventListener('click', function() {
+                dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+            });
+
+            window.addEventListener('click', function(e) {
+                if(!userAvatar.contains(e.target) && !dropdownMenu.contains(e.target)){
+                    dropdownMenu.style.display = 'none';
+                }
+            })
+        })
+    </script>
+
+</body>
+
+</html>
